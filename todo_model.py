@@ -7,8 +7,9 @@ class TodoTask(models.Model):
     is_done = fields.Boolean('Done?')
     active = fields.Boolean('Active?', default=True)
     
-    @api.one
+    @api.multi
     def do_toggle_done(self):
+        self.ensure_one()
         self.is_done = not self.is_done
         return True
     
